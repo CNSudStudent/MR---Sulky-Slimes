@@ -20,6 +20,9 @@ public class MouseManager : MonoBehaviour
     public Vector3 originalSlimePosition;
     public Quaternion originalRotationPosition;
 
+    [Header("Lives")]
+    public LivesManager livesManager;
+
     void Start()
     {
         originalSlimePosition = slimeTransform.position;
@@ -29,11 +32,17 @@ public class MouseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (livesManager.lives < 0)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             slimeRigidbody.isKinematic = true;
             slimeTransform.position = originalSlimePosition;
             slimeTransform.rotation = originalRotationPosition;
+            livesManager.RemoveLife();
         }
 
         if (Input.GetMouseButtonDown(0))
