@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LivesManager : MonoBehaviour
 {
@@ -11,7 +12,12 @@ public class LivesManager : MonoBehaviour
     public void RemoveLife()
     {
         lives -= 1;
-        print("You lost a life! Lives: " + lives);
+        hearts[lives].SetActive(false);
+
+        if(lives == 0)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
 

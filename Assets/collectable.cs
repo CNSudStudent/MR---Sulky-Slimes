@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class collectable : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class collectable : MonoBehaviour
 
     public float speed = 0.1f;
     public float direction = -1f;
+
+    [Header("Scene to Load")]
+    public int sceneNumber;
 
     void Start()
     {
@@ -43,6 +47,12 @@ public class collectable : MonoBehaviour
         if (other.name == "Slime")
         {
             gameObject.SetActive(false);
+            Invoke("LoadNextScene", 2f);
         }
+    }
+
+    private void LoadNextScene ()
+    {
+        SceneManager.LoadScene(sceneNumber);
     }
 }
